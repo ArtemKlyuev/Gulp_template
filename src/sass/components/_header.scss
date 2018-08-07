@@ -1,0 +1,46 @@
+.header {
+	@include absolute($top: 0, $left: 50%);
+	z-index: 3;
+	width: 100%;
+	max-width: 1170px;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+	padding-top: 50px;
+}
+
+.header-logo {
+	display: flex;
+	align-items: center;
+	font: 700 18px $mainFont;
+	text-transform: uppercase;
+}
+
+.header-nav__item {
+	display: inline-block;
+	margin-right: 12px;
+	cursor: pointer;
+	&:last-child {
+		height: 14px;
+		width: 14px;
+		margin-right: 0;
+	}
+	a {
+		font: 700 16px $mainFont;
+		text-decoration: none;
+		text-transform: uppercase;
+		color: $main-text-color;
+	}
+	span {
+		display: block;
+		height: 3px;
+		width: 100%;
+		margin-bottom: 2px;
+		background-color: $main-text-color;
+		&:last-child{
+			margin-bottom: 0;
+		}
+	}
+}
+
