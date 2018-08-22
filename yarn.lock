@@ -808,10 +808,6 @@ builtin-modules@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
-bxslider@^4.2.13:
-  version "4.2.13"
-  resolved "https://registry.yarnpkg.com/bxslider/-/bxslider-4.2.13.tgz#4fcc136a5c2c9719690b9ea1fd16e929e1c7cfc0"
-
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
