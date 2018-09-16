@@ -1,14 +1,29 @@
 'use strict';
 
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 const $ = require('gulp-load-plugins')();
 const gulp = require('gulp');
 const combiner = require('stream-combiner2').obj;
 
 module.exports = function (options) {
-	
+
 	return function () {
 		return combiner(
-			gulp.src(['src/img/**/*.{png,jpg,jpeg,gif}', '!src/img/png_sprites'], {
+			gulp.src(['src/img/**/*.{png,jpg,jpeg,gif}', '!src/img/png_sprites', '!src/img/icons'], {
+				since: gulp.lastRun('img')
+			}),
+			$.if(!isDev, $.tinypngCompress({
+				key: '',
+				summarise: true,
+				sigFile: 'src/img/.tinypng-sigs',
+				log: true
+			})),
+			$.newer('build/img/'),
+			$.debug({
+				title: 'img'
+			}),
+			gulp.dest('build/img/'),
+			gulp.src(['src/img/**/*.{ico,svg}', '!src/img/png_sprites', '!src/img/icons'], {
 				since: gulp.lastRun('img')
 			}),
 			$.newer('build/img/'),
@@ -16,34 +31,12 @@ module.exports = function (options) {
 				title: 'img'
 			}),
 			gulp.dest('build/img/')
-		)
+		).on('error', $.notify.onError(function (err) {
+			return {
+				title: 'IMG',
+				message: err.message
+			};
+		}));
 	};
 
 };
-
-
-
-
-
-
-
-//module.exports = function () {
-//	gp.gulp.task('img:dev', () => {
-//		return gp.gulp.src('src/img/**/*.{png,jpg,gif}', '!src/img/png_sprites')
-//			.pipe(gp.gulp.dest('build/img/'));
-//	});
-//
-//	gp.gulp.task('img:build', () => {
-//		return gp.gulp.src('src/img/**/*.{png,jpg,gif}',  '!src/img/png_sprites')
-//			.pipe(gp.$.tinypngCompress({
-//					key: 'JgfDkXf_pbETnWAM_xANz_vq8fzAx_aF',
-//					summarise: true,
-//					sigFile: 'src/img/.tinypng-sigs',
-//					log: true
-//			}))
-//			.pipe(gp.gulp.dest('build/img/'));
-//	});
-//};
-
-
-// Возможно добавить rev
